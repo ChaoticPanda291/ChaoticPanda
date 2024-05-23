@@ -1,5 +1,5 @@
 package SomethingPackage;
-class Card {
+public class Card {
     
     private int rank;//represents the rank of a card
     private int suit;//represents the suit of a card
@@ -32,11 +32,11 @@ class Card {
     
     public int getValue() //returns face value and returns 10 if its a face card 
     {
-        if(rank>10)
+        if(rank>9)
         {
             value=10;
         }
-        else if(rank==1)
+        else if(rank==0)
         {
             value=11;
         }

@@ -1,18 +1,17 @@
-import SomethingPackage.Card;
-import SomethingPackage.Dealer;
-import SomethingPackage.Deck;
+import SomethingPackage.*;
 import java.util.*;
 public class Blackjack {
 private static int cash;//cash the user bets with
 private static int bet;//how much the user wants to bet
 private static int AceCounter;//how many aces are in the user's hand
 private static ArrayList<Card> hand;//represents the user's hand
-private static int handvalue;//the value of the user's hand
+private static int handv;//the value of the user's hand
 private static String name;//name of the user
 public static void main(String[] args){
     System.out.println("Hi! What is your name?");
-    Scanner scan = new Scanner(System.in);
-    name = scan.nextLine();
+     Scanner scan = new Scanner(System.in); 
+        name = scan.nextLine();
+    
     System.out.println("Hello, "+name+", lets play some BlackJack!");
     System.out.println("How much cash do you want to start with?");
     Scanner money = new Scanner(System.in);
@@ -32,21 +31,21 @@ public static void main(String[] args){
         System.out.println("Money on the table:"+bet);
         System.out.println("Here is your hand: ");
         System.out.println(hand);
-        int handvalue = calcHandValue(hand);
+        int handv = calcHandValue(hand);
         System.out.println("The dealer is showing: ");
         dealer.showFirstCard();
-        if(hasBlackJack(handvalue) && dealer.hasBlackJack())//check if both the user and dealer have blackjack.
+        if(hasBlackJack(handv) && dealer.hasBlackJack())//check if both the user and dealer have blackjack.
         {
             Push();
         }
-        else if(hasBlackJack(handvalue))//check if the user has blackjack.
+        else if(hasBlackJack(handv))//check if the user has blackjack.
         {
             System.out.println("You have BlackJack!");
             System.out.println("You win 2x your money back!");
             cash=cash+bet;
             Win();
         }
-        else if(dealer.hasBlackJack())//check if the dealer has blackjack.
+        else if(dealer.hasBlackJack()) //check if the dealer has blackjack.
         {
             System.out.println("Here is the dealer's hand:");
             dealer.showHand();
@@ -85,13 +84,13 @@ public static void main(String[] args){
                 Hit(deck, hand);
                 System.out.println("Your hand is now:");
                 System.out.println(hand);
-                handvalue = calcHandValue(hand);
-                if(checkBust(handvalue))//checks if the user busted
+                handv = calcHandValue(hand);
+                if(checkBust(handv))//checks if the user busted
                 {
                     Lose();
                     break;
                 }
-                if(handvalue<=21 && hand.size()==5)//checks for a five card trick.
+                if(handv<=21 && hand.size()==5)//checks for a five card trick.
                 {
                     fivecardtrick();
                     break;
@@ -111,7 +110,7 @@ public static void main(String[] args){
                 }
                 else
                 {
-                    int you = 21-handvalue;//check who is closer to 21 and determine winner
+                    int you = 21-handv;//check who is closer to 21 and determine winner
                     int deal = 21-dealerhand;
                     if(you==deal)
                     {
@@ -154,9 +153,9 @@ public static void main(String[] args){
 /*
  * Checks if the user has blackjack.
  */
-public static boolean hasBlackJack(int handValue)
+public static boolean hasBlackJack(int handV)
 {
-    if(handValue==21)
+    if(handV==21)
     {
         return true;
     }
@@ -169,29 +168,29 @@ public static int calcHandValue(List<Card> hand)
 {
     Card[] aHand = new Card[]{};
     aHand = hand.toArray(aHand);
-    int handvalue=0;
+    int handv=0;
     for(int i=0; i<aHand.length; i++)
     {
-        handvalue += aHand[i].getValue();
+        handv += aHand[i].getValue();
         if(aHand[i].getValue()==11)
         {
             AceCounter++;
         }
-        while(AceCounter>0 && handvalue>21)
+        while(AceCounter>0 && handv>21)
         {
-            handvalue-=10;
+            handv-=10;
             AceCounter--;
         }
     }
-    return handvalue;
+    return handv;
 }
 /*
  * Asks the user how much he or she would like to bet.
  */
 public static int Bet(int cash)
 {
-    Scanner sc=new Scanner(System.in);
-    int bet=sc.nextInt();
+    Scanner sc = new Scanner(System.in);
+    int bet = sc.nextInt();
     while(bet>cash)
     {
         System.out.println("You cannot bet more cash than you have!");
@@ -206,7 +205,7 @@ public static int Bet(int cash)
 public static void Win()
 {
     System.out.println("Congratulations, you win!");
-    cash=cash+bet;
+    cash += bet;
     System.out.println("Cash: "+cash);
 }
 /*
@@ -215,7 +214,7 @@ public static void Win()
 public static void Lose()
 {
     System.out.println("Sorry, you lose!");
-    cash=cash-bet;
+    cash -= bet;
     System.out.println("Cash: "+cash);
 }
 /*
@@ -235,17 +234,17 @@ public static void Hit(Deck deck, List<Card> hand)
     hand.add(deck.drawCard());
     Card[] aHand = new Card[]{};
     aHand = hand.toArray(aHand);
-    handvalue = 0;
+    handv = 0;
     for(int i=0; i<aHand.length; i++)
     {
-        handvalue += aHand[i].getValue();
+        handv += aHand[i].getValue();
         if(aHand[i].getValue()==11)
         {
             AceCounter++;
         }
-        while(AceCounter>0 && handvalue>21)
+        while(AceCounter>0 && handv>21)
         {
-            handvalue-=10;
+            handv-=10;
             AceCounter--;
         }
     }

@@ -2,45 +2,45 @@ package SomethingPackage;
 import java.util.ArrayList;
 import java.util.Random;
 
-class Deck {
+public class Deck {
 private ArrayList<Card> deck  = new ArrayList<Card>();
-Deck() // makes a 6-deck of cards
+public  Deck() // makes a 6-deck of cards
 {
     for(int i=0; i< 24 ; i++) {
-        for(int j=0; j< 78; j++){ 
-            if (i < 4 && j < 13) {
+        for(int j = 0; j< 72; j++){ 
+            if (i < 4 && j < 12) {
             deck.add(new Card(i,j));
             }
-            else if (i < 8 && j < 26) {
-                i = i/2;
-                j = j/2;
+            else if (i < 8 && j < 24) {
+                i = (int) (i/2);
+                j = (int) (j/2);
                 deck.add(new Card(i,j));
             }
-            else if (i < 12 && j < 39) {
-                i = i/3;
-                j = j/3;
+            else if (i < 12 && j < 36) {
+                i = (int) (i/3);
+                j = (int) (j/3);
                 deck.add(new Card(i,j));
              }
-            else if (i < 16 && j < 52) {
-                i = i/4;
-                j = j/4;
+            else if (i < 16 && j < 48) {
+                i = (int) (i/4);
+                j = (int) (j/4);
                 deck.add(new Card(i,j));
             }
-            else if (i < 20 && j < 65) {
-                i = i/5;
-                j = j/5;
+            else if (i < 20 && j < 60) {
+                i = (int) (i/5);
+                j = (int) (j/5);
                  deck.add(new Card(i,j));
              }
-            else if (i < 24 && j < 78) {
-                i = i/6;
-                j = j/6;
+            else if (i < 24 && j < 72) {
+                i = (int) (i/6);
+                j = (int) (j/6);
                  deck.add(new Card(i,j));
             }
         }
     }
 }
 
-public void shuffle() {//shuffles deck 
+public void shuffle() { //shuffles deck 
     Random random = new Random();
     Card temp;
     for(int i=0; i<200; i++) {
